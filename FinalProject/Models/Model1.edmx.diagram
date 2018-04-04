@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7eda1bc5b9934de48835ba2e059091a0" Name="Diagram1">
+        <EntityTypeShape EntityType="PetDBModel.Document" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetDBModel.Image" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetDBModel.Pet" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetDBModel.Surgery" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetDBModel.Vaccination" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetDBModel.Visit" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetDBModel.Weight" Width="1.5" PointX="0.75" PointY="16.125" IsExpanded="true" />
+        <AssociationConnector Association="PetDBModel.FK_Pet_Document" ManuallyRouted="false" />
+        <AssociationConnector Association="PetDBModel.FK_Pet_Image" ManuallyRouted="false" />
+        <AssociationConnector Association="PetDBModel.FK_Pet_Surgery" ManuallyRouted="false" />
+        <AssociationConnector Association="PetDBModel.FK_Pet_Vaccination" ManuallyRouted="false" />
+        <AssociationConnector Association="PetDBModel.FK_Pet_Visit" ManuallyRouted="false" />
+        <AssociationConnector Association="PetDBModel.FK_Pet_Weight" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

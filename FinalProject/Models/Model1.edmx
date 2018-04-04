@@ -1,0 +1,471 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PetDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="DocumentID" />
+          </Key>
+          <Property Name="DocumentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="PDF" Type="image" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="ImageID" />
+          </Key>
+          <Property Name="ImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Link" Type="image" />
+        </EntityType>
+        <EntityType Name="Pet">
+          <Key>
+            <PropertyRef Name="PetID" />
+          </Key>
+          <Property Name="PetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Birthdate" Type="datetime" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Photo" Type="image" />
+          <Property Name="IsFixed" Type="bit" Nullable="false" />
+          <Property Name="SurgeryID" Type="int" Nullable="false" />
+          <Property Name="VaccinationID" Type="int" Nullable="false" />
+          <Property Name="WeightID" Type="int" Nullable="false" />
+          <Property Name="DocumentID" Type="int" Nullable="false" />
+          <Property Name="VisitID" Type="int" Nullable="false" />
+          <Property Name="ImageID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Surgery">
+          <Key>
+            <PropertyRef Name="SurgeryID" />
+          </Key>
+          <Property Name="SurgeryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vaccination">
+          <Key>
+            <PropertyRef Name="VaccinationID" />
+          </Key>
+          <Property Name="VaccinationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="DateRecieved" Type="date" Nullable="false" />
+          <Property Name="DueDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Visit">
+          <Key>
+            <PropertyRef Name="VisitID" />
+          </Key>
+          <Property Name="VisitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClinicName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Cost" Type="float" />
+          <Property Name="VisitDescription" Type="nvarchar(max)" />
+          <Property Name="VisitDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Weight">
+          <Key>
+            <PropertyRef Name="WeightID" />
+          </Key>
+          <Property Name="WeightID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Weight" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Pet_Document">
+          <End Role="Document" Type="Self.Document" Multiplicity="1" />
+          <End Role="Pet" Type="Self.Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="DocumentID" />
+            </Principal>
+            <Dependent Role="Pet">
+              <PropertyRef Name="DocumentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Image">
+          <End Role="Image" Type="Self.Image" Multiplicity="1" />
+          <End Role="Pet" Type="Self.Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Image">
+              <PropertyRef Name="ImageID" />
+            </Principal>
+            <Dependent Role="Pet">
+              <PropertyRef Name="ImageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Surgery">
+          <End Role="Surgery" Type="Self.Surgery" Multiplicity="1" />
+          <End Role="Pet" Type="Self.Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Surgery">
+              <PropertyRef Name="SurgeryID" />
+            </Principal>
+            <Dependent Role="Pet">
+              <PropertyRef Name="SurgeryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Vaccination">
+          <End Role="Vaccination" Type="Self.Vaccination" Multiplicity="1" />
+          <End Role="Pet" Type="Self.Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaccination">
+              <PropertyRef Name="VaccinationID" />
+            </Principal>
+            <Dependent Role="Pet">
+              <PropertyRef Name="VaccinationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Visit">
+          <End Role="Visit" Type="Self.Visit" Multiplicity="1" />
+          <End Role="Pet" Type="Self.Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visit">
+              <PropertyRef Name="VisitID" />
+            </Principal>
+            <Dependent Role="Pet">
+              <PropertyRef Name="VisitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Weight">
+          <End Role="Weight" Type="Self.Weight" Multiplicity="1" />
+          <End Role="Pet" Type="Self.Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Weight">
+              <PropertyRef Name="WeightID" />
+            </Principal>
+            <Dependent Role="Pet">
+              <PropertyRef Name="WeightID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PetDBModelStoreContainer">
+          <EntitySet Name="Document" EntityType="Self.Document" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pet" EntityType="Self.Pet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Surgery" EntityType="Self.Surgery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vaccination" EntityType="Self.Vaccination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visit" EntityType="Self.Visit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Weight" EntityType="Self.Weight" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Pet_Document" Association="Self.FK_Pet_Document">
+            <End Role="Document" EntitySet="Document" />
+            <End Role="Pet" EntitySet="Pet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Image" Association="Self.FK_Pet_Image">
+            <End Role="Image" EntitySet="Image" />
+            <End Role="Pet" EntitySet="Pet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Surgery" Association="Self.FK_Pet_Surgery">
+            <End Role="Surgery" EntitySet="Surgery" />
+            <End Role="Pet" EntitySet="Pet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Vaccination" Association="Self.FK_Pet_Vaccination">
+            <End Role="Vaccination" EntitySet="Vaccination" />
+            <End Role="Pet" EntitySet="Pet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Visit" Association="Self.FK_Pet_Visit">
+            <End Role="Visit" EntitySet="Visit" />
+            <End Role="Pet" EntitySet="Pet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Weight" Association="Self.FK_Pet_Weight">
+            <End Role="Weight" EntitySet="Weight" />
+            <End Role="Pet" EntitySet="Pet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PetDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="DocumentID" />
+          </Key>
+          <Property Name="DocumentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PDF" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_Pet_Document" FromRole="Document" ToRole="Pet" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="ImageID" />
+          </Key>
+          <Property Name="ImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Link" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_Pet_Image" FromRole="Image" ToRole="Pet" />
+        </EntityType>
+        <EntityType Name="Pet">
+          <Key>
+            <PropertyRef Name="PetID" />
+          </Key>
+          <Property Name="PetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Birthdate" Type="DateTime" Precision="3" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsFixed" Type="Boolean" Nullable="false" />
+          <Property Name="SurgeryID" Type="Int32" Nullable="false" />
+          <Property Name="VaccinationID" Type="Int32" Nullable="false" />
+          <Property Name="WeightID" Type="Int32" Nullable="false" />
+          <Property Name="DocumentID" Type="Int32" Nullable="false" />
+          <Property Name="VisitID" Type="Int32" Nullable="false" />
+          <Property Name="ImageID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Document" Relationship="Self.FK_Pet_Document" FromRole="Pet" ToRole="Document" />
+          <NavigationProperty Name="Image" Relationship="Self.FK_Pet_Image" FromRole="Pet" ToRole="Image" />
+          <NavigationProperty Name="Surgery" Relationship="Self.FK_Pet_Surgery" FromRole="Pet" ToRole="Surgery" />
+          <NavigationProperty Name="Vaccination" Relationship="Self.FK_Pet_Vaccination" FromRole="Pet" ToRole="Vaccination" />
+          <NavigationProperty Name="Visit" Relationship="Self.FK_Pet_Visit" FromRole="Pet" ToRole="Visit" />
+          <NavigationProperty Name="Weight" Relationship="Self.FK_Pet_Weight" FromRole="Pet" ToRole="Weight" />
+        </EntityType>
+        <EntityType Name="Surgery">
+          <Key>
+            <PropertyRef Name="SurgeryID" />
+          </Key>
+          <Property Name="SurgeryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_Pet_Surgery" FromRole="Surgery" ToRole="Pet" />
+        </EntityType>
+        <EntityType Name="Vaccination">
+          <Key>
+            <PropertyRef Name="VaccinationID" />
+          </Key>
+          <Property Name="VaccinationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateRecieved" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DueDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_Pet_Vaccination" FromRole="Vaccination" ToRole="Pet" />
+        </EntityType>
+        <EntityType Name="Visit">
+          <Key>
+            <PropertyRef Name="VisitID" />
+          </Key>
+          <Property Name="VisitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClinicName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cost" Type="Double" />
+          <Property Name="VisitDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VisitDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_Pet_Visit" FromRole="Visit" ToRole="Pet" />
+        </EntityType>
+        <EntityType Name="Weight">
+          <Key>
+            <PropertyRef Name="WeightID" />
+          </Key>
+          <Property Name="WeightID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Weight1" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_Pet_Weight" FromRole="Weight" ToRole="Pet" />
+        </EntityType>
+        <Association Name="FK_Pet_Document">
+          <End Role="Document" Type="Self.Document" Multiplicity="1" />
+          <End Role="Pet" Type="Self.Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="DocumentID" />
+            </Principal>
+            <Dependent Role="Pet">
+              <PropertyRef Name="DocumentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Image">
+          <End Role="Image" Type="Self.Image" Multiplicity="1" />
+          <End Role="Pet" Type="Self.Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Image">
+              <PropertyRef Name="ImageID" />
+            </Principal>
+            <Dependent Role="Pet">
+              <PropertyRef Name="ImageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Surgery">
+          <End Role="Surgery" Type="Self.Surgery" Multiplicity="1" />
+          <End Role="Pet" Type="Self.Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Surgery">
+              <PropertyRef Name="SurgeryID" />
+            </Principal>
+            <Dependent Role="Pet">
+              <PropertyRef Name="SurgeryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Vaccination">
+          <End Role="Vaccination" Type="Self.Vaccination" Multiplicity="1" />
+          <End Role="Pet" Type="Self.Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vaccination">
+              <PropertyRef Name="VaccinationID" />
+            </Principal>
+            <Dependent Role="Pet">
+              <PropertyRef Name="VaccinationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Visit">
+          <End Role="Visit" Type="Self.Visit" Multiplicity="1" />
+          <End Role="Pet" Type="Self.Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Visit">
+              <PropertyRef Name="VisitID" />
+            </Principal>
+            <Dependent Role="Pet">
+              <PropertyRef Name="VisitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pet_Weight">
+          <End Role="Weight" Type="Self.Weight" Multiplicity="1" />
+          <End Role="Pet" Type="Self.Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Weight">
+              <PropertyRef Name="WeightID" />
+            </Principal>
+            <Dependent Role="Pet">
+              <PropertyRef Name="WeightID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PetDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Documents" EntityType="Self.Document" />
+          <EntitySet Name="Images" EntityType="Self.Image" />
+          <EntitySet Name="Pets" EntityType="Self.Pet" />
+          <EntitySet Name="Surgeries" EntityType="Self.Surgery" />
+          <EntitySet Name="Vaccinations" EntityType="Self.Vaccination" />
+          <EntitySet Name="Visits" EntityType="Self.Visit" />
+          <EntitySet Name="Weights" EntityType="Self.Weight" />
+          <AssociationSet Name="FK_Pet_Document" Association="Self.FK_Pet_Document">
+            <End Role="Document" EntitySet="Documents" />
+            <End Role="Pet" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Image" Association="Self.FK_Pet_Image">
+            <End Role="Image" EntitySet="Images" />
+            <End Role="Pet" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Surgery" Association="Self.FK_Pet_Surgery">
+            <End Role="Surgery" EntitySet="Surgeries" />
+            <End Role="Pet" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Vaccination" Association="Self.FK_Pet_Vaccination">
+            <End Role="Vaccination" EntitySet="Vaccinations" />
+            <End Role="Pet" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Visit" Association="Self.FK_Pet_Visit">
+            <End Role="Visit" EntitySet="Visits" />
+            <End Role="Pet" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pet_Weight" Association="Self.FK_Pet_Weight">
+            <End Role="Weight" EntitySet="Weights" />
+            <End Role="Pet" EntitySet="Pets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PetDBModelStoreContainer" CdmEntityContainer="PetDBEntities">
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="PetDBModel.Document">
+              <MappingFragment StoreEntitySet="Document">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PDF" ColumnName="PDF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="PetDBModel.Image">
+              <MappingFragment StoreEntitySet="Image">
+                <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pets">
+            <EntityTypeMapping TypeName="PetDBModel.Pet">
+              <MappingFragment StoreEntitySet="Pet">
+                <ScalarProperty Name="PetID" ColumnName="PetID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="IsFixed" ColumnName="IsFixed" />
+                <ScalarProperty Name="SurgeryID" ColumnName="SurgeryID" />
+                <ScalarProperty Name="VaccinationID" ColumnName="VaccinationID" />
+                <ScalarProperty Name="WeightID" ColumnName="WeightID" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="VisitID" ColumnName="VisitID" />
+                <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Surgeries">
+            <EntityTypeMapping TypeName="PetDBModel.Surgery">
+              <MappingFragment StoreEntitySet="Surgery">
+                <ScalarProperty Name="SurgeryID" ColumnName="SurgeryID" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vaccinations">
+            <EntityTypeMapping TypeName="PetDBModel.Vaccination">
+              <MappingFragment StoreEntitySet="Vaccination">
+                <ScalarProperty Name="VaccinationID" ColumnName="VaccinationID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="DateRecieved" ColumnName="DateRecieved" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visits">
+            <EntityTypeMapping TypeName="PetDBModel.Visit">
+              <MappingFragment StoreEntitySet="Visit">
+                <ScalarProperty Name="VisitID" ColumnName="VisitID" />
+                <ScalarProperty Name="ClinicName" ColumnName="ClinicName" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="VisitDescription" ColumnName="VisitDescription" />
+                <ScalarProperty Name="VisitDate" ColumnName="VisitDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Weights">
+            <EntityTypeMapping TypeName="PetDBModel.Weight">
+              <MappingFragment StoreEntitySet="Weight">
+                <ScalarProperty Name="WeightID" ColumnName="WeightID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Weight1" ColumnName="Weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

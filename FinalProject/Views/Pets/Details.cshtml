@@ -1,0 +1,106 @@
+﻿@model FinalProject.Models.Pet
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Pet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Birthdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Birthdate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsFixed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsFixed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Document.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Document.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image.ImageID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image.ImageID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Surgery.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surgery.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vaccination.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vaccination.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Visit.ClinicName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Visit.ClinicName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight.WeightID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight.WeightID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PetID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
